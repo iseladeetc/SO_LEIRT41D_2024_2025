@@ -22,13 +22,13 @@ int main ()
     pid_t retfork = fork();
     if ( retfork == 0) {
         // novo processo
-        printf("Child Process width pid = %d; ppid = %d\n", getpid(), getppid());
+        printf("Child Process with pid = %d; ppid = %d\n", getpid(), getppid());
 
         // Se apenas o filho executar o process_work o pai termina primeiro
         // o que acontece ao processo filho?
-        process_work(DEFAULT_ITER);
+        //process_work(DEFAULT_ITER);
         
-        printf("Child Process terminating width pid = %d; ppid = %d\n", 
+        printf("Child Process terminating with pid = %d; ppid = %d\n", 
                     getpid(), getppid());
         return 0;
     }
@@ -38,11 +38,9 @@ int main ()
 
     // Se apenas o pai executar o process_work o filho termina primeiro
     // o que acontece ao processo filho?
-    // process_work(DEFAULT_ITER);
+    process_work(DEFAULT_ITER);
 
     printf("process %d terminating\n", getpid());
 
-
-    printf("process %d terminating\n", getpid());
     return 0;
 }
