@@ -3,6 +3,7 @@
 #include <stdlib.h>
 
 #include <sys/types.h>
+#include <sys/wait.h>
 #include <unistd.h>
 
 #define DEFAULT_ITER    1e9
@@ -34,7 +35,7 @@ int main ()
         
         printf("Child Process terminating with pid = %d; ppid = %d\n", 
                     getpid(), getppid());
-        return 0;
+        return 13;
     }
 
     // Processo ? -> processo pai
@@ -44,7 +45,20 @@ int main ()
     // o que acontece ao processo filho?
     //process_work(DEFAULT_ITER);
 
-    pid_t pid = 
+    int status;
+    pid_t pid = wait(&status);
+    if (pid == -1) {
+        perror("calling wait");
+        exit(EXIT_FAILURE);
+    }
+    printf("Process %d", pid);
+    if (WIFEXITED(status)) {
+        printf(" has terminated normally with exit value %d\n", WEXITSTATUS(status));
+    }
+    else if (WIFSIGNALED(status)) {
+        printf(" has terminated by signal %d\n", WTERMSIG(status));
+    }
+
 
     printf("process %d terminating\n", getpid());
 
