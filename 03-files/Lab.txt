@@ -1,0 +1,32 @@
+Neste projeto estão duas versões de um programa para copiar ficheiros: 
+    fcopy.c que usa as funções da biblioteca standard do C e o 
+    copy.c  que usa apenas chamadas de sistema do sistema operativo UNIX.
+
+Estes programas recebem através da linha de argumentos o ficheiro a copiar, 
+o nome do ficheiro de destino e a dimensão do buffer a utilizar na cópia, 
+por exemplo: 
+    ./fcopy filesrc filedst 128 
+copia o ficheiro de nome filesrc para o ficheiro filedst utilizando um 
+buffer com dimensão de 128 bytes.
+
+Para determinar o tempo que o programa demora a realizar a cópia coloque o 
+comando time antes da linha de comandos que executa o programa, i.e.:
+    time ./fcopy filesrc filedst 128.
+
+Utilize um ficheiro com uma dimensão de pelo menos de 10 Mbytes ou que poderá 
+criar através do comando:
+    dd if=/dev/zero bs=1M count=10 of=filesrc
+
+A linha de comandos anterior cria o ficheiro filesrc com 10Mbytes preenchido 
+com valores zero.
+
+Pode determinar o número de chamadas de sistemas, realizadas durante a execução 
+de um programa, através do comando:
+    strace -c ./fcopy filesrc filedst 128
+
+Determine o tempo (utilizando o comando time) que demora a copiar um ficheiro, 
+utilizando diferentes dimensões para o buffer, e.g., 1, 64, 128, 256, 512, 1024 
+com os programas fcopy e copy. 
+
+Compare os tempos obtidos justificando os resultados e as diferenças de 
+desempenho obtidas.
