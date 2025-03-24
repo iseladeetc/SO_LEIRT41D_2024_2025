@@ -1,3 +1,6 @@
+/*
+ * Ver ficheiro lab.txt com indicações de ensaios
+ */
 #include <stdio.h>
 #include <stdlib.h>
 

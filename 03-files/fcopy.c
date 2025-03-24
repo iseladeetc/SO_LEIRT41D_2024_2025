@@ -1,17 +1,5 @@
 /*
- * Para testar pode criar um ficheiro de 10 Mbytes através do comando:
- *    dd if=/dev/zero bs=1M count=10 of=fileSrc
- * 
- * Pode executar o programa indicando o ficheiro fonte e a dimensão 
- * do buffer a ser utilizado. A obtenção do tempo de execução pode 
- * ser feita usando o comando time:
- *    time ./fcopy fileSrc fileDst 128
- * 
- * Para determinar o número de chamadas de sistemas realizadas durante 
- * a execução de um programa use o seguinte comando:
- *    strace ./fcopy fileSrc fileDst 128
- * 
- * Realize vários ensaios variando a dimensão do buffer utilizado.
+ * Ver ficheiro lab.txt com indicações de ensaios
  */
 #include <stdio.h>
 #include <stdlib.h>
@@ -54,9 +42,9 @@ int main (int argc, char *argv[])
     size_t nBytesRd;
 
     while ( (nBytesRd = fread(buf, 1, bufferDim, fsrc)) > 0 ) {
-        size_t nBytesWr = fwrite(buf, 1, nBytesRd, fdst);
-        if (nBytesWr < nBytesRd) handleError("Write error");    
-    }
+		size_t nBytesWr = fwrite(buf, 1, nBytesRd, fdst);
+		if (nBytesWr < nBytesRd) handleError("Write error");    
+	}
 	
 	if ( ferror(fsrc) ) handleError("Read error"); 
 	
